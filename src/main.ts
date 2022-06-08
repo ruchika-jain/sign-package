@@ -19,7 +19,7 @@ async function run(): Promise<void> {
     }
     
     await cosignGenerateKeypair(TOKEN);
-    await signPackage(repoDetails, semver, packageName);
+    await signPackage(repositoryOwner, semver, packageName);
   } 
   catch (error) {
     if (error instanceof Error) core.setFailed("Something failed");
@@ -37,7 +37,7 @@ async function cosignGenerateKeypair(token: string): Promise<void> {
   }
 }
 
-async function signPackage(repositoryOwner: string[], semver: string, packageName: string): Promise<void> {
+async function signPackage(repositoryOwner: string, semver: string, packageName: string): Promise<void> {
   try {
     const cmd : string = `cosign sign --key cosign.key ghcr.io/${repositoryOwner}/${packageName}:${semver}`;
     await exec.exec(cmd)
