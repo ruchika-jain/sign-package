@@ -113,7 +113,7 @@ function run() {
                 return;
             }
             yield cosignGenerateKeypair(TOKEN);
-            yield signPackage(repoDetails, semver, packageName);
+            yield signPackage(repositoryOwner, semver, packageName);
         }
         catch (error) {
             if (error instanceof Error)
